@@ -3,9 +3,11 @@ import { fabric } from 'fabric'
 class StaticVectorObject extends fabric.Group {
   static type = 'StaticVector'
   public src: string
+  public colorchanges: {}
   //@ts-ignore
   initialize(objects, options, others) {
     this.set('src', others.src)
+    this.set('colorchanges', others.colorchanges)
     const object = fabric.util.groupSVGElements(objects, options)
     //@ts-ignore
     super.initialize([object], others)
@@ -15,13 +17,15 @@ class StaticVectorObject extends fabric.Group {
   toObject(propertiesToInclude = []) {
     // @ts-ignore
     return super.toObject(propertiesToInclude, {
-      src: this.src
+      src: this.src,
+      colorchanges: this.colorchanges
     })
   }
   toJSON(propertiesToInclude = []) {
     // @ts-ignore
     return super.toObject(propertiesToInclude, {
-      src: this.src
+      src: this.src,
+      colorchanges: this.colorchanges
     })
   }
 
