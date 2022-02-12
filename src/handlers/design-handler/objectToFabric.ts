@@ -208,7 +208,7 @@ class ObjectToFabric {
              }
            else{
              // @ts-ignore
-             activeObject._objects[0].fill = value
+             object._objects[0].fill = value
            }
           }
           resolve(object)
