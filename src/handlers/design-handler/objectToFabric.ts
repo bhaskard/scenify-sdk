@@ -187,14 +187,30 @@ class ObjectToFabric {
       try {
         const baseOptions = this.getBaseOptions(item)
         const src = item.metadata.src
+        const colorchanges = item.metadata.colorchanges
         fabric.loadSVGFromURL(src, (objects, opts) => {
           const { width, height } = baseOptions
           if (!width || !height) {
             baseOptions.width = opts.width
             baseOptions.height = opts.height
           }
-          const object = new fabric.StaticVector(objects, opts, { ...baseOptions, src })
-
+          // objects.
+          const object = new fabric.StaticVector(objects, opts, { ...baseOptions, src, colorchanges })
+          // @ts-ignore
+          const elements = object._objects[0]._objects
+          for (const [key, value] of Object.entries(colorchanges)) {
+            if (elements) {
+            elements.forEach(selectedItem => {
+              if(selectedItem.fill == key) {
+                selectedItem.fill = value
+              }
+            })
+             }
+           else{
+             // @ts-ignore
+             activeObject._objects[0].fill = value
+           }
+          }
           resolve(object)
         })
       } catch (err) {

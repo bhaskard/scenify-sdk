@@ -243,6 +243,7 @@ class ObjectToFabric {
       try {
         const baseOptions = this.getBaseOptions(item, options, inGroup)
         const src = item.metadata.src
+        const colorchanges = item.metadata.colorchanges
         fabric.loadSVGFromURL(src, (objects, opts) => {
           const { width, height, top, left } = baseOptions
           if (!width || !height) {
@@ -251,7 +252,7 @@ class ObjectToFabric {
             baseOptions.top = options.top
             baseOptions.left = options.left
           }
-          const object = new fabric.StaticVector(objects, opts, { ...baseOptions, src })
+          const object = new fabric.StaticVector(objects, opts, { ...baseOptions, src, colorchanges })
           if (isNaN(top) || isNaN(left)) {
             object.set({
               top: options.top,

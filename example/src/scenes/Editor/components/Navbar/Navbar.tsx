@@ -26,12 +26,12 @@ function NavbarEditor() {
   const downloadImage = async () => {
     if (editor) {
       // editor.toGif({})
-      const data = await editor.toGif({})
+      const data = await editor.toPNG({})
       if (data) {
         const a = document.createElement('a')
         // @ts-ignore
         a.href = data
-        a.download = 'drawing.gif'
+        a.download = 'drawing.png'
         a.click()
       }
     }

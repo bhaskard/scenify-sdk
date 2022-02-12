@@ -43,6 +43,8 @@ function Illustration() {
         selectedItem.fill = next
       })
     }
+    // @ts-ignore
+    activeObject.colorchanges[prev] = next
     // console.log({ grouped, prev, next })
   }
   return (

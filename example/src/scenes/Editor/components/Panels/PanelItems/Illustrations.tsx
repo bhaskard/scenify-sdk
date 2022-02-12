@@ -31,7 +31,10 @@ function Illustrations() {
       .then(url => {
         const options = {
           type: 'StaticVector',
-          metadata: { src: url }
+          metadata: { src: url,
+              colorchanges: {
+                "#ffffff": "#ffffff"
+          }}
         }
         editor.add(options)
       })

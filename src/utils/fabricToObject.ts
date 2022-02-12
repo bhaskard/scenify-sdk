@@ -135,14 +135,13 @@ class ExportObject {
 
   [ObjectType.STATIC_VECTOR](item, options, inGroup) {
     const baseOptions = this.getBaseOptions(item, options, inGroup)
-
     const object = {
       ...baseOptions,
       metadata: {
-        src: item.src
+        src: item.src,
+        colorchanges: item.colorchanges
       }
     }
-
     return object
   }
 

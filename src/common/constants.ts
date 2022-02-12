@@ -3,6 +3,7 @@ export const PROPERTIES_TO_INCLUDE = [
   'name',
   'description',
   'src',
+  'colorchanges',
   'keys',
   'keyValues',
   'animation',
