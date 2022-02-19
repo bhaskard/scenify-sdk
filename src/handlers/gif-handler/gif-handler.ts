@@ -7,7 +7,7 @@ import { Linear } from 'gsap'
 import gifshot from 'gifshot'
 
 class GifHandler extends BaseHandler {
-  public async toGif(params: {}) {
+  public async toGif(params: any) {
     const template = this.handlers.templateHandler.exportToJSON(params.templatename)
     const { frames, frameDuration } = await renderer({
       silent: false,
