@@ -212,6 +212,11 @@ class ObjectToFabric {
              object._objects[0].fill = value
            }
           }
+          // const colorchangesdup = JSON.parse(JSON.stringify(colorchanges)); //new json
+          // // object here
+          // for (const [key, value] of Object.entries(colorchanges)) {
+          //
+          // }
           resolve(object)
         })
       } catch (err) {

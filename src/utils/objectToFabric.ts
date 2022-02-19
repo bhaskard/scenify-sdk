@@ -179,14 +179,16 @@ class ObjectToFabric {
   }
 
   [ObjectType.STATIC_PATH](item, options, inGroup) {
-
+    const now = Date.now();
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options, inGroup)
         const path = item.metadata.value
         const fill = item.metadata.fill
-        const element = new fabric.StaticPath({ ...baseOptions, path,
-          fill: fill ? fill : '#000000'
+        baseOptions.id = 'STATIC_PATH'+now
+        const element = new fabric.StaticPath(
+            { ...baseOptions,
+              path, fill: fill ? fill : '#000000'
         })
 
         const { top, left } = element
@@ -271,6 +273,21 @@ class ObjectToFabric {
               left: options.left
             })
             object.scaleToWidth(320)
+          }
+          // @ts-ignore
+          const elements = object._objects[0]._objects
+          for (const [key, value] of Object.entries(colorchanges)) {
+            if (elements) {
+            elements.forEach(selectedItem => {
+              if(selectedItem.fill == key) {
+                selectedItem.fill = value
+              }
+            })
+             }
+           else{
+             // @ts-ignore
+             object._objects[0].fill = value
+           }
           }
           resolve(object)
         })

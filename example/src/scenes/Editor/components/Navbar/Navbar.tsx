@@ -33,6 +33,8 @@ function NavbarEditor() {
         a.href = data
         a.download = 'drawing.png'
         a.click()
+        const exportedTemplate = editor.exportToJSON()
+    console.log(exportedTemplate )
       }
     }
   }
