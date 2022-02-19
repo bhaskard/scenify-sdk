@@ -171,8 +171,8 @@ class Editor extends EventManager {
   }
 
   // DESIGN
-  public exportToJSON = () => {
-    return this.handlers.templateHandler.exportToJSON()
+  public exportToJSON = (name:any) => {
+    return this.handlers.templateHandler.exportToJSON(name)
   }
   public importFromJSON = data => {
     this.handlers.templateHandler.importFromJSON(data)

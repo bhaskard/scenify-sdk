@@ -4,12 +4,12 @@ import objectToFabric from '../utils/objectToFabric'
 import BaseHandler from './BaseHandler'
 
 class TemplateHandler extends BaseHandler {
-  exportToJSON() {
+  exportToJSON(name) {
     let animated = false
     const canvasJSON: any = this.canvas.toJSON(this.handlers.propertiesToInclude)
     const frameOptions = this.handlers.frameHandler.getOptions()
     const template = {
-      name: 'Untitled design',
+      name: name,
       objects: [],
       background: {
         type: 'color',
