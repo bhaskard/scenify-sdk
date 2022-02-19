@@ -9,7 +9,7 @@ import Opacity from './components/Opacity'
 import Position from './components/Position'
 import Animate from './components/Animate'
 import { useActiveObject } from '../../../../../../../src'
-import { useEffect } from 'react'
+import {useEffect, useState} from 'react'
 import { groupBy } from 'lodash'
 import { HexColorPicker } from 'react-colorful'
 import { StatefulPopover } from 'baseui/popover'
@@ -18,6 +18,7 @@ function Illustration() {
   const { setActiveSubMenu } = useAppContext()
   const activeObject = useActiveObject()
   const [colors, setColors] = React.useState([])
+   const [curcolor, setCurcolor] = useState('')
 
   useEffect(() => {
     if (activeObject) {
@@ -32,17 +33,43 @@ function Illustration() {
     setColors(colors)
   }
 
+  const resetCurColor= () => {
+      setCurcolor('')
+    console.log("opened pallete")
+  }
+
+
   const applyColors = (prev, next) => {
     // @ts-ignore
     const elements = activeObject._objects[0]._objects
+
+      console.log(prev)
+      console.log(curcolor)
+    if (curcolor !== ''){
+        console.log("here")
+        prev = curcolor
+    }
+    setCurcolor(prev)
+    console.log(elements)
     const grouped = groupBy(elements, 'fill')
+    console.log(grouped)
+    console.log(prev)
     const selectedItems = grouped[prev]
     console.log({ selectedItems })
     if (selectedItems) {
       selectedItems.forEach(selectedItem => {
         selectedItem.fill = next
       })
+      setCurcolor(next)
     }
+
+    const colorappliedgrouped = groupBy(elements, 'fill')
+    console.log(colorappliedgrouped)
+    console.log("==============new palletee===============")
+     console.log("==============new palletee===============")
+     console.log("==============new palletee===============")
+     console.log("==============new palletee===============")
+     console.log("==============new palletee===============")
     // @ts-ignore
     activeObject.colorchanges[prev] = next
     // console.log({ grouped, prev, next })
@@ -70,12 +97,14 @@ function Illustration() {
               autoFocus
             >
               <Button
-                onClick={() => setActiveSubMenu(SubMenuType.COLOR)}
+                onClick={() => {
+                    setActiveSubMenu(SubMenuType.COLOR)
+                }}
                 size={SIZE.compact}
                 kind={KIND.tertiary}
                 shape={SHAPE.square}
               >
-                <Icons.FillColor size={24} color={color} />
+                <Icons.FillColor  size={24} color={color} />
               </Button>
             </StatefulPopover>
           )

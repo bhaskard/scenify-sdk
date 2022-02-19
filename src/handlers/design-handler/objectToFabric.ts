@@ -188,6 +188,7 @@ class ObjectToFabric {
         const baseOptions = this.getBaseOptions(item)
         const src = item.metadata.src
         const colorchanges = item.metadata.colorchanges
+        console.log(colorchanges)
         fabric.loadSVGFromURL(src, (objects, opts) => {
           const { width, height } = baseOptions
           if (!width || !height) {

@@ -36,6 +36,7 @@ class ObjectToFabric {
   }
 
   [ObjectType.STATIC_TEXT](item, options, inGroup) {
+    const now = Date.now();
     return new Promise((resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options, inGroup)
@@ -49,7 +50,8 @@ class ObjectToFabric {
           ...(fontSize && { fontSize }),
           ...(fontWeight && { fontWeight }),
           ...(charSpacing && { charSpacing }),
-          ...(lineheight && { lineheight })
+          ...(lineheight && { lineheight }),
+          id: 'STATIC_TEXT_'+now
         }
         const element = new fabric.StaticText(textOptions)
 
@@ -70,6 +72,7 @@ class ObjectToFabric {
   }
 
   [ObjectType.DYNAMIC_TEXT](item, options, inGroup) {
+    const now = Date.now();
     return new Promise((resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options, inGroup)
@@ -96,7 +99,8 @@ class ObjectToFabric {
           ...(fontSize && { fontSize }),
           ...(fontWeight && { fontWeight }),
           ...(charSpacing && { charSpacing }),
-          ...(lineheight && { lineheight })
+          ...(lineheight && { lineheight }),
+          id:'DYNAMIC_TEXT_'+now
         }
         const element = new fabric.DynamicText(textOptions)
 
@@ -117,6 +121,7 @@ class ObjectToFabric {
   }
 
   [ObjectType.DYNAMIC_IMAGE](item, options, inGroup) {
+    const now = Date.now();
     return new Promise((resolve, reject) => {
       try {
         const { metadata } = item
@@ -126,7 +131,8 @@ class ObjectToFabric {
         const element = new fabric.DynamicImage({
           ...baseOptions,
           keys: item.keys,
-          keyValues: keyValues ? keyValues : []
+          keyValues: keyValues ? keyValues : [],
+          id: 'DYNAMIC_IMAGE_'+now
         })
         resolve(element)
       } catch (err) {
@@ -136,6 +142,7 @@ class ObjectToFabric {
   }
 
   [ObjectType.STATIC_IMAGE](item, options, inGroup) {
+    const now = Date.now();
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options, inGroup)
@@ -151,7 +158,8 @@ class ObjectToFabric {
         const element = new fabric.StaticImage(image, {
           ...baseOptions,
           cropX: item.metadata.cropX || 0,
-          cropY: item.metadata.cropY || 0
+          cropY: item.metadata.cropY || 0,
+          id: 'STATIC_IMAGE_'+now
         })
 
         const { top, left } = element
@@ -171,12 +179,15 @@ class ObjectToFabric {
   }
 
   [ObjectType.STATIC_PATH](item, options, inGroup) {
+
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options, inGroup)
         const path = item.metadata.value
         const fill = item.metadata.fill
-        const element = new fabric.StaticPath({ ...baseOptions, path, fill: fill ? fill : '#000000' })
+        const element = new fabric.StaticPath({ ...baseOptions, path,
+          fill: fill ? fill : '#000000'
+        })
 
         const { top, left } = element
 
@@ -239,6 +250,7 @@ class ObjectToFabric {
   }
 
   [ObjectType.STATIC_VECTOR](item, options, inGroup) {
+    const now = Date.now();
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = this.getBaseOptions(item, options, inGroup)
@@ -252,7 +264,7 @@ class ObjectToFabric {
             baseOptions.top = options.top
             baseOptions.left = options.left
           }
-          const object = new fabric.StaticVector(objects, opts, { ...baseOptions, src, colorchanges })
+          const object = new fabric.StaticVector(objects, opts, { ...baseOptions, id:'STATIC_VECTOR_'+now, src, colorchanges })
           if (isNaN(top) || isNaN(left)) {
             object.set({
               top: options.top,
