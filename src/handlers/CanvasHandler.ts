@@ -23,6 +23,10 @@ class CanvasHandler extends BaseHandler {
     const deltaPoint = new fabric.Point(diffWidth, diffHeight)
     this.canvas.relativePan(deltaPoint)
   }
+
+  rendrall(){
+    this.canvas.requestRenderAll()
+  }
 }
 
 export default CanvasHandler

@@ -33,7 +33,7 @@ function NavbarEditor() {
         a.href = data
         a.download = 'drawing.png'
         a.click()
-        const exportedTemplate = editor.exportToJSON()
+        const exportedTemplate = editor.exportToJSON('')
     console.log(exportedTemplate )
       }
     }
@@ -52,6 +52,10 @@ function NavbarEditor() {
     })
     await loadFonts(fonts)
     editor.importFromJSON(template)
+  }
+
+  const renderAll= ()=>{
+    editor.renderAll()
   }
 
   const loadFonts = fonts => {

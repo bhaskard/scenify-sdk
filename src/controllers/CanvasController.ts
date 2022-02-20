@@ -9,6 +9,11 @@ class CanvasController {
   resize(nextWidth, nextHeight) {
     this.handler.resize(nextWidth, nextHeight)
   }
+
+  renderAll(){
+    this.handler.rendrall()
+  }
+
 }
 
 export default CanvasController

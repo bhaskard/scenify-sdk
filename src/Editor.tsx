@@ -62,6 +62,10 @@ class Editor extends EventManager {
     this.handlers.objectsHandler.clear()
   }
 
+  public renderAll = () => {
+    this.canvas.renderAll()
+  }
+
   public deselect = () => {
     this.handlers.objectsHandler.deselect()
   }
